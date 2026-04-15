@@ -1,5 +1,7 @@
 # Macro Hotspot Agent
 
+![Macro Hotspot Agent cover](./assets/project-cover.svg)
+
 A runnable multi-agent stock selection project for macro-event investing.
 
 This project recreates the "macro hotspot stock selection" side of the Huatai research note 《大模型概念与宏观热点选股》. Instead of starting from a concept label, it starts from a macro event description such as `美联储连续降息50bp` or `国内新一轮化债万亿`, then turns that event into a weighted stock portfolio with rationale and backtest output.
