@@ -76,7 +76,7 @@ config.py    模型与策略参数
 ## 安装
 
 ```bash
-cd "/Users/xinwei/Desktop/my show/macro_hotspot_agent"
+cd macro_hotspot_agent
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
