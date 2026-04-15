@@ -4,26 +4,26 @@
   <circle cx="1030" cy="146" r="170" fill="#2DA44E" fill-opacity="0.18"/>
   <circle cx="940" cy="488" r="228" fill="#7EE787" fill-opacity="0.08"/>
   <rect x="86" y="96" width="212" height="38" rx="19" fill="#EAFBF0"/>
-  <text x="192" y="120" text-anchor="middle" fill="#0C1D12" font-size="20" font-family="Arial, Helvetica, sans-serif" font-weight="700">EVENT-DRIVEN SYSTEM</text>
-  <text x="86" y="200" fill="#F6FFF7" font-size="56" font-family="Arial, Helvetica, sans-serif" font-weight="700">Macro Hotspot Agent</text>
-  <text x="86" y="252" fill="#D6F5DE" font-size="28" font-family="Arial, Helvetica, sans-serif">Macro narrative to sector mapping, stock selection,</text>
-  <text x="86" y="292" fill="#D6F5DE" font-size="28" font-family="Arial, Helvetica, sans-serif">risk challenge, and weighted portfolio construction</text>
+  <text x="192" y="120" text-anchor="middle" fill="#0C1D12" font-size="20" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">事件驱动系统</text>
+  <text x="86" y="200" fill="#F6FFF7" font-size="52" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">宏观热点选股 Agent</text>
+  <text x="86" y="252" fill="#D6F5DE" font-size="28" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif">从宏观叙事出发，完成行业映射、选股、</text>
+  <text x="86" y="292" fill="#D6F5DE" font-size="28" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif">风险挑战与加权组合构建</text>
   <rect x="86" y="348" width="174" height="60" rx="18" fill="#163222"/>
   <rect x="284" y="348" width="174" height="60" rx="18" fill="#163222"/>
   <rect x="482" y="320" width="188" height="116" rx="18" fill="#163222"/>
   <rect x="694" y="320" width="188" height="116" rx="18" fill="#163222"/>
   <rect x="906" y="320" width="188" height="116" rx="18" fill="#163222"/>
-  <text x="173" y="385" text-anchor="middle" fill="#F6FFF7" font-size="23" font-family="Arial, Helvetica, sans-serif" font-weight="700">Planner</text>
-  <text x="371" y="385" text-anchor="middle" fill="#F6FFF7" font-size="23" font-family="Arial, Helvetica, sans-serif" font-weight="700">Sector Worker</text>
-  <text x="576" y="372" text-anchor="middle" fill="#F6FFF7" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Macro Worker</text>
-  <text x="576" y="406" text-anchor="middle" fill="#D6F5DE" font-size="18" font-family="Arial, Helvetica, sans-serif">event path</text>
-  <text x="788" y="372" text-anchor="middle" fill="#F6FFF7" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Stock Worker</text>
-  <text x="788" y="406" text-anchor="middle" fill="#D6F5DE" font-size="18" font-family="Arial, Helvetica, sans-serif">candidate names</text>
-  <text x="1000" y="372" text-anchor="middle" fill="#F6FFF7" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Risk Worker</text>
-  <text x="1000" y="406" text-anchor="middle" fill="#D6F5DE" font-size="18" font-family="Arial, Helvetica, sans-serif">hedges and falsification</text>
+  <text x="173" y="385" text-anchor="middle" fill="#F6FFF7" font-size="23" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">规划</text>
+  <text x="371" y="385" text-anchor="middle" fill="#F6FFF7" font-size="23" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">行业映射</text>
+  <text x="576" y="372" text-anchor="middle" fill="#F6FFF7" font-size="22" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">宏观解读</text>
+  <text x="576" y="406" text-anchor="middle" fill="#D6F5DE" font-size="18" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif">事件传导路径</text>
+  <text x="788" y="372" text-anchor="middle" fill="#F6FFF7" font-size="22" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">个股筛选</text>
+  <text x="788" y="406" text-anchor="middle" fill="#D6F5DE" font-size="18" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif">候选股票</text>
+  <text x="1000" y="372" text-anchor="middle" fill="#F6FFF7" font-size="22" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">风险挑战</text>
+  <text x="1000" y="406" text-anchor="middle" fill="#D6F5DE" font-size="18" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif">对冲与证伪</text>
   <rect x="86" y="486" width="438" height="54" rx="16" fill="#F4FFF6"/>
-  <text x="305" y="520" text-anchor="middle" fill="#0C1D12" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Python  •  Tushare  •  DeepSeek  •  Weighted Backtest</text>
-  <text x="86" y="575" fill="#D6F5DE" font-size="20" font-family="Arial, Helvetica, sans-serif">core / satellite / hedge portfolios from macro-event input</text>
+  <text x="305" y="520" text-anchor="middle" fill="#0C1D12" font-size="22" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif" font-weight="700">Python  •  Tushare  •  DeepSeek  •  加权回测</text>
+  <text x="86" y="575" fill="#D6F5DE" font-size="20" font-family="'PingFang SC','Microsoft YaHei',Arial,Helvetica,sans-serif">从宏观事件输入到 core / satellite / hedge 组合</text>
   <defs>
     <linearGradient id="bg" x1="36" y1="36" x2="1164" y2="594" gradientUnits="userSpaceOnUse">
       <stop stop-color="#11281A"/>
