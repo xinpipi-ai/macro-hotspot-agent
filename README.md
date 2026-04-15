@@ -20,17 +20,29 @@ This project recreates the "macro hotspot stock selection" side of the Huatai re
 - The agent roles are clearly separated, so the reasoning is easier to audit.
 - It is designed as a local research prototype, not just a notebook experiment.
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    A["Macro Event Input<br/>美联储降息 / 化债 / 油价冲击"] --> B["planner<br/>detect event and choose reasoning path"]
+    B --> C["sector_worker<br/>map event to SW sectors"]
+    C --> D1["macro_worker<br/>interpret macro transmission"]
+    C --> D2["stock_worker<br/>screen candidate names"]
+    C --> D3["risk_worker<br/>generate counter-cases and hedges"]
+    D1 --> E["evidence_judge<br/>arbitrate and adjust"]
+    D2 --> E
+    D3 --> E
+    E --> F["portfolio_builder<br/>core / satellite / hedge"]
+    F --> G["JSON output + weighted backtest"]
+```
+
 ## Pipeline
 
-```text
-planner
-  -> sector_worker
-  -> macro_worker   (parallel)
-  -> stock_worker   (parallel)
-  -> risk_worker    (parallel)
-  -> evidence_judge
-  -> portfolio_builder
-```
+1. `planner` interprets the event and selects a reasoning path.
+2. `sector_worker` narrows the search to likely beneficiary or defensive sectors.
+3. `macro_worker`, `stock_worker`, and `risk_worker` run in parallel.
+4. `evidence_judge` resolves disagreements and revises the candidate set.
+5. `portfolio_builder` assigns bucket weights and prepares the final backtest input.
 
 ## Compared With Concept Stock Selection
 
