@@ -1,36 +1,66 @@
 # Macro Hotspot Agent
 
-基于华泰金工研报《大模型概念与宏观热点选股》的**宏观热点选股**多智能体复现。
+A runnable multi-agent stock selection project for macro-event investing.
 
-## 架构
+This project recreates the "macro hotspot stock selection" side of the Huatai research note 《大模型概念与宏观热点选股》. Instead of starting from a concept label, it starts from a macro event description such as `美联储连续降息50bp` or `国内新一轮化债万亿`, then turns that event into a weighted stock portfolio with rationale and backtest output.
 
+## What It Does
+
+- Takes a macro event in natural language
+- Maps the event to likely beneficiary or defensive sectors
+- Runs specialized agents for macro interpretation, stock picking, and risk falsification
+- Lets a judge reconcile disagreements
+- Builds a weighted `core / satellite / hedge` portfolio
+- Runs a weighted backtest against CSI 300
+
+## Why This Project Is Interesting
+
+- It models an event-driven workflow instead of a static theme screener.
+- The hedge bucket makes it more realistic than a long-only idea list.
+- The agent roles are clearly separated, so the reasoning is easier to audit.
+- It is designed as a local research prototype, not just a notebook experiment.
+
+## Pipeline
+
+```text
+planner
+  -> sector_worker
+  -> macro_worker   (parallel)
+  -> stock_worker   (parallel)
+  -> risk_worker    (parallel)
+  -> evidence_judge
+  -> portfolio_builder
 ```
-        planner (识别事件 + 选推理路径)
-            ↓
-        sector_worker (映射申万L1行业)
-            ↓
-    ┌──── 并行 ────┐
-macro_worker  stock_worker  risk_worker
-(宏观解读)   (个股筛选)      (证伪/对冲)
-    └────┬────────┘
-         ↓
-    evidence_judge (仲裁)
-         ↓
-    portfolio_builder (权重: core=3/satellite=2/hedge=1)
-```
 
-## 与概念选股的区别
+## Compared With Concept Stock Selection
 
-| | 概念选股 | 宏观热点选股 |
+| Dimension | Concept Stock Agent | Macro Hotspot Agent |
 |---|---|---|
-| 输入 | 概念名（如 "AI算力"） | 事件描述（如 "美联储降息50bp"） |
-| 候选池 | Tushare 概念板块成分股 | 申万L1受益行业 × 市值top N |
-| 分桶 | core / satellite | core / satellite / **hedge** |
-| 组合上限 | 30 只 | 20 只 |
-| 权重 | 等权 | 按 bucket 加权（core=3/sat=2/hedge=1） |
-| 架构 | 5 agent 顺序 | 4 agent 并行 + 仲裁 |
+| Input | Concept name such as `AI算力` | Event description such as `美联储降息50bp` |
+| Candidate pool | Tushare concept constituents | Beneficiary SW level-1 industries and top market-cap names |
+| Portfolio buckets | `core / satellite` | `core / satellite / hedge` |
+| Weighting | Equal-weight backtest | Bucket-weighted backtest |
+| Focus | Theme decomposition | Event transmission path and cross-checking |
 
-## 安装
+## Stack
+
+- `Python`
+- `Tushare` for SW industry classification and daily market-cap data
+- `DeepSeek` for agent reasoning
+- Local JSON outputs for inspection and reuse
+
+## Repository Structure
+
+```text
+agents/      planner, sector mapper, macro reader, stock picker, risk worker, judge
+data/        Tushare + model clients
+run.py       CLI entry point
+graph.py     pipeline orchestration
+backtest.py  weighted portfolio backtest
+config.py    model, token, and strategy parameters
+```
+
+## Setup
 
 ```bash
 cd "/Users/xinwei/Desktop/my show/macro_hotspot_agent"
@@ -39,33 +69,64 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 使用
+Create a local `.env` file:
 
 ```bash
-# 激活环境
+TUSHARE_TOKEN=your_tushare_token
+DEEPSEEK_API_KEY=your_deepseek_key
+```
+
+## Usage
+
+```bash
+# Activate the environment
 source .venv/bin/activate
 
-# 跑不同宏观事件
+# Run different macro events
 python run.py "美联储连续降息50bp"
 python run.py "国内新一轮化债万亿"
 python run.py "中东地缘冲突升级，油价飙升"
 python run.py "碳中和政策加码"
 
-# 自定义回测区间
+# Customize the backtest window
 python run.py "AI产业链景气度加速" --backtest-start 20240101 --backtest-end 20260414
 
-# 跳过回测
+# Skip backtest and only build the portfolio
 python run.py "xxx事件" --skip-backtest
 ```
 
-## 数据源
+## Output
 
-- **Tushare** 申万一级行业分类（31 个）+ 日频市值（daily_basic）
-- **DeepSeek** 作为各 agent 的推理引擎
+Each run writes a JSON artifact under `outputs/` containing:
 
-## 关键参数（config.py）
+- Event interpretation
+- Selected reasoning paths
+- Sector mapping
+- Stock recommendations
+- Risk checks and judge adjustments
+- Final weighted portfolio
 
-- `PORTFOLIO_MAX_SIZE = 20` - 组合容量
-- `STOCKS_PER_INDUSTRY_IN_POOL = 8` - 每行业候选池大小
-- `DEFAULT_REASONING_PATHS` - 默认推理路径（利率敏感成长/高股息防御/出口链景气）
-- `BENCHMARK = "000300.SH"` - 沪深300
+The CLI also prints the final basket, bucket weights, and backtest summary.
+
+## Key Parameters
+
+Main knobs live in `config.py`:
+
+- `PORTFOLIO_MAX_SIZE = 20`
+- `STOCKS_PER_SECTOR_MIN` / `STOCKS_PER_SECTOR_MAX`
+- `STOCKS_PER_INDUSTRY_IN_POOL = 8`
+- `DEFAULT_REASONING_PATHS`
+- `BENCHMARK = "000300.SH"`
+
+## Design Notes
+
+- Candidate stocks are constrained by sector and market cap to keep the search space practical.
+- The `risk_worker` is intentionally separate so the system can generate counterarguments.
+- The final portfolio uses bucket weighting to reflect different confidence levels.
+
+## Roadmap Ideas
+
+- Add richer event templates and sector-mapping rules
+- Support benchmark comparison beyond CSI 300
+- Export judge decisions and risk notes as standalone artifacts
+- Add batch evaluation for multiple macro scenarios
